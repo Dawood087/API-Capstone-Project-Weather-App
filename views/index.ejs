@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wetter-App</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <!--Search Bar-->
+    <header>
+      <form action="/" method="POST">
+        <input
+          type="text"
+          name="location"
+          placeholder="Gebe einen Stadtnamen ein z.B. Hamburg.."
+        />
+      </form>
+    </header>
+    <!--Weather Container-->
+    <div class="weather-container">
+      <% if (locals.city && locals.city !== "") { %>
+      <h2>Vorhersage für <%= dateToday %> den <%= fullDate %></h2>
+      <!--Wetter Heute-->
+      <div class="weather-today">
+        <p><%= icon %></p>
+        <div class="weather-infos">
+          <p><%= city %></p>
+          <p><%= temp %> °C</p>
+          <p><%= condition %></p>
+        </div>
+      </div>
+      <!--Weather Container für nächsten 4 Tage-->
+      <div class="weather-upcoming">
+        <!--Heute + 1 Tag-->
+        <div class="weather-next">
+          <p><%= date1 %></p>
+          <p class="icon-small"><%= icon1 %></p>
+          <p><%= temp1min %> °C - <%= temp1max %> °C</p>
+        </div>
+        <!--Heute + 2 Tage-->
+        <div class="weather-next">
+          <p><%= date2 %></p>
+          <p class="icon-small"><%= icon2 %></p>
+          <p><%= temp2min %> °C - <%= temp2max %> °C</p>
+        </div>
+        <!--Heute + 3 Tage-->
+        <div class="weather-next">
+          <p><%= date3 %></p>
+          <p class="icon-small"><%= icon3 %></p>
+          <p><%= temp3min %> °C - <%= temp3max %> °C</p>
+        </div>
+        <!--Heute + 4 Tage-->
+        <div class="weather-next">
+          <p><%= date4 %></p>
+          <p class="icon-small"><%= icon4 %></p>
+          <p><%= temp4min %> °C - <%= temp4max %> °C</p>
+        </div>
+      </div>
+      <% } else { %>
+      <h2>Bitte geben Sie eine Stadt ein.</h2>
+      <% } %>
+    </div>
+  </body>
+</html>
