@@ -69,5 +69,10 @@
       <h2>Bitte geben Sie eine Stadt ein.</h2>
       <% } %>
     </div>
+    <% if (error) { %>
+    <script>
+      alert("Bitte gib einen gültigen Stadtnamen ein!");
+    </script>
+    <% } %>
   </body>
 </html>

@@ -14,7 +14,32 @@ app.use(express.urlencoded({ extended: true }));
 
 // Homepage rendern
 app.get("/", (req, res) => {
-  res.render("index.ejs", { city: "", temp: "", condition: "" });
+  const today = new Date();
+  res.render("index.ejs", {
+    city: "",
+    temp: "",
+    condition: "",
+    icon: "",
+    temp1min: "",
+    temp1max: "",
+    temp2min: "",
+    temp2max: "",
+    temp3min: "",
+    temp3max: "",
+    temp4min: "",
+    temp4max: "",
+    dateToday: weekdays[today.getDay()],
+    date1: weekdays[(today.getDay() + 1) % 7],
+    date2: weekdays[(today.getDay() + 2) % 7],
+    date3: weekdays[(today.getDay() + 3) % 7],
+    date4: weekdays[(today.getDay() + 4) % 7],
+    icon1: "",
+    icon2: "",
+    icon3: "",
+    icon4: "",
+    fullDate: today.toLocaleDateString("de-DE"),
+    error: req.query.error || null,
+  });
 });
 
 const weatherCodes = {
@@ -138,10 +163,11 @@ app.post("/", async (req, res) => {
       icon3: weatherIcons[forecast.daily.weathercode[3]],
       icon4: weatherIcons[forecast.daily.weathercode[4]],
       fullDate: today.toLocaleDateString("de-DE"),
+      error: null,
     });
   } catch (error) {
     console.log(error.response.data);
-    alert("Gib einen gültigen Stadtnamen Ein.");
+    res.redirect("/?error=1");
   }
 });
 
